@@ -16,84 +16,85 @@ Let's assume that the latest block height of askcoin has reached 250,000, and no
 
 1. stop the full node you are currently running, add a **merge_point** field in your ***config.json*** and fill in the block_id, block_hash, export_path of the merge_point:
 
-```json
-{
-    "log_level": "info",
-    "log_path": "./log",
-    "db_path": "./db",
-    "network": {
-        "p2p": {
-            "host": "here should be your host (domain or ip address)",
-            "port": 18050,
-            "max_conn": 1000,
-            "init_peer": [
-                {
-                    "host": "node1.askcoin.me",
-                    "port": 18050
-                },
-                {
-                    "host": "node2.askcoin.me",
-                    "port": 18050
-                }
-            ]
-        },
-        "websocket": {
-            "enable": true,
-            "host": "0.0.0.0",
-            "port": 19050,
-            "max_conn": 5000
-        }
-    },
-    "merge_point": {
-        "export": {
-            "block_id": 200000,
-            "block_hash": "AAB7D8a5cRxMUw/8MInehnxyQMswNnwzAldfW53GtdM=",
-            "export_path": "./merge_point/merge_point_200000.json"
-        }
-    }
-}
-```
+   ```json
+   {
+       "log_level": "info",
+       "log_path": "./log",
+       "db_path": "./db",
+       "network": {
+           "p2p": {
+               "host": "here should be your host (domain or ip address)",
+               "port": 18050,
+               "max_conn": 1000,
+               "init_peer": [
+                   {
+                       "host": "node1.askcoin.me",
+                       "port": 18050
+                   },
+                   {
+                       "host": "node2.askcoin.me",
+                       "port": 18050
+                   }
+               ]
+           },
+           "websocket": {
+               "enable": true,
+               "host": "0.0.0.0",
+               "port": 19050,
+               "max_conn": 5000
+           }
+       },
+       "merge_point": {
+           "export": {
+               "block_id": 200000,
+               "block_hash": "AAB7D8a5cRxMUw/8MInehnxyQMswNnwzAldfW53GtdM=",
+               "export_path": "./merge_point/merge_point_200000.json"
+           }
+       }
+   }
+   ```
 
- 	2. restart your full-node and wait for it to export the merge_point file to **export_path**, the full-node will stop running after exporting the merge_point file
- 	3. In the merge_point field structure, delete **export** field, add **import** field and fill in block_id, block_hash, import_path fields and modify **db_path** field to a new directory:
+2. restart your full-node and wait for it to export the merge_point file to **export_path**, the full-node will stop running after exporting the merge_point file
 
-```json
-{
-    "log_level": "info",
-    "log_path": "./log",
-    "db_path": "./db_new_200000",
-    "network": {
-        "p2p": {
-            "host": "here should be your host (domain or ip address)",
-            "port": 18050,
-            "max_conn": 1000,
-            "init_peer": [
-                {
-                    "host": "node1.askcoin.me",
-                    "port": 18050
-                },
-                {
-                    "host": "node2.askcoin.me",
-                    "port": 18050
-                }
-            ]
-        },
-        "websocket": {
-            "enable": true,
-            "host": "0.0.0.0",
-            "port": 19050,
-            "max_conn": 5000
-        }
-    },
-    "merge_point": {
-        "import": {
-            "block_id": 200000,
-            "block_hash": "AAB7D8a5cRxMUw/8MInehnxyQMswNnwzAldfW53GtdM=",
-            "import_path": "./merge_point/merge_point_200000.json"
-        }
-    }
-}
-```
+3. In the merge_point field structure, delete **export** field, add **import** field and fill in block_id, block_hash, import_path fields and modify **db_path** field to a new directory:
+
+   ```json
+   {
+       "log_level": "info",
+       "log_path": "./log",
+       "db_path": "./db_new_200000",
+       "network": {
+           "p2p": {
+               "host": "here should be your host (domain or ip address)",
+               "port": 18050,
+               "max_conn": 1000,
+               "init_peer": [
+                   {
+                       "host": "node1.askcoin.me",
+                       "port": 18050
+                   },
+                   {
+                       "host": "node2.askcoin.me",
+                       "port": 18050
+                   }
+               ]
+           },
+           "websocket": {
+               "enable": true,
+               "host": "0.0.0.0",
+               "port": 19050,
+               "max_conn": 5000
+           }
+       },
+       "merge_point": {
+           "import": {
+               "block_id": 200000,
+               "block_hash": "AAB7D8a5cRxMUw/8MInehnxyQMswNnwzAldfW53GtdM=",
+               "import_path": "./merge_point/merge_point_200000.json"
+           }
+       }
+   }
+   ```
 
 4. Restart your full-node, now the full-node will use block height 200,000 as a new starting point. From that starting point, it will synchronize the remaining blocks from other nodes and save them to the new db directory (**db_new_200000 **directory). Because the block history before block 200,000 has been merged into a single merge_point file, it saves a lot of disk space. When synchronization is complete, you can safely delete the old **db** directory (but If you have enough disk space, I suggest you backup the **old db** directory as a historical proof)
 
