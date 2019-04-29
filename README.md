@@ -10,7 +10,7 @@ As we all know, the amount of data on the chain will continue to increase with t
 
 You should first understand the askcoin's full-node configuration file, as follows:
 
-[***Askcoin Configuration***](https://github.com/lichuan/askcoin#configuration)
+[***<u>Askcoin Configuration</u>***](https://github.com/lichuan/askcoin#configuration)
 
 Let's assume that the latest block height of askcoin has reached 250,000, and now you want to reduce disk usage through merge_point, but how do you choose the **merge_point**? One reason for choosing which block to use as a **merge_point** is that it has been widely accepted by all nodes, so suppose that the block height 200,000 as the merge_point, now we can modify the ***config.json*** file to use merge_point:
 
