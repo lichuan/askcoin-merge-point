@@ -96,7 +96,7 @@ Let's assume that the latest block height of askcoin has reached 250,000, and no
    }
    ```
 
-4. Restart your full-node, now the full-node will use block height 200,000 as a new starting point. From that starting point, it will synchronize the remaining blocks from other nodes and save them to the new db directory (**db_new_200000 **directory). Because the block history before block 200,000 has been merged into a single merge_point file, it saves a lot of disk space. When synchronization is complete, you can safely delete the old **db** directory (but If you have enough disk space, I suggest you backup the **old db** directory as a historical proof)
+4. Restart your full-node, now the full-node will use block height 200,000 as a new starting point. From that starting point, it will synchronize the remaining blocks from other nodes and save them to the new db directory (**db_new_200000** directory). Because the block history before block 200,000 has been merged into a single merge_point file, it saves a lot of disk space. When synchronization is complete, you can safely delete the old **db** directory (but If you have enough disk space, I suggest you backup the **old db** directory as a historical proof)
 
 
 
