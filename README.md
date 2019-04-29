@@ -14,7 +14,7 @@ You should first understand the askcoin's full-node configuration file, as follo
 
 Let's assume that the latest block height of askcoin has reached 250,000, and now you want to reduce disk usage through merge_point, but how do you choose the **merge_point**? One reason for choosing which block to use as a **merge_point** is that it has been widely accepted by all nodes, so suppose that the block height 200,000 as the merge_point, now we can modify the ***config.json*** file to use merge_point:
 
-1. stop the full node you are currently running, add a **merge_point** field in your ***config.json*** and fill in the **export_path**, **block_id**, **block_hash **of the merge_point:
+1. stop the full node you are currently running, add a **merge_point** field in your ***config.json*** and fill in the block_id, block_hash, export_path of the merge_point:
 
 ```json
 {
@@ -55,7 +55,7 @@ Let's assume that the latest block height of askcoin has reached 250,000, and no
 ```
 
  	2. restart your full-node and wait for it to export the merge_point file to **export_path**, the full-node will stop running after exporting the merge_point file
- 	3. In the merge_point field structure, delete **export** field, add **import** field and fill in **block_id**, **block_hash**, **import_path** fields and modify **db_path** field to a new directory:
+ 	3. In the merge_point field structure, delete **export** field, add **import** field and fill in block_id, block_hash, import_path fields and modify **db_path** field to a new directory:
 
 ```json
 {
